@@ -1,7 +1,7 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "theme": "mint",
-  "name": "Mint Starter Kit",
+  "name": "TAMC Docs",
   "colors": {
     "primary": "#ffffff",
     "light": "#044F94",
