@@ -1,97 +1,84 @@
 ---
 title: 'Quickstart'
-description: 'Start building awesome documentation in under 5 minutes'
+description: 'Getting started is as simple as integrating the TAMC Client into your application. Below are examples in both Python and JavaScript.'
 ---
 
-## Setup your development
+### Installation
 
-Learn how to update your docs locally and deploy them to the public.
+**Invitation-Only Distribution:**  
+Access to the TAMC client libraries is granted on an invitation-only basis. If you have been invited to use TAMC’s Super Model Router, you should have received instructions to install the package from our private repository. For example, if you are using Python, you might install the package using:
 
-### Edit and preview
+```bash
+pip install tmac --extra-index-url https://pypi.tmac.com/simple
+```
 
-<AccordionGroup>
-  <Accordion icon="github" title="Clone your docs locally">
-    During the onboarding process, we created a repository on your Github with
-    your docs content. You can find this repository on our
-    [dashboard](https://dashboard.mintlify.com). To clone the repository
-    locally, follow these
-    [instructions](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository)
-    in your terminal.
-  </Accordion>
-  <Accordion icon="rectangle-terminal" title="Preview changes">
-    Previewing helps you make sure your changes look as intended. We built a
-    command line interface to render these changes locally. 
-    1. Install the
-    [Mintlify CLI](https://www.npmjs.com/package/mintlify) to preview the
-    documentation changes locally with this command: ``` npm i -g mintlify ```
-    2. Run the following command at the root of your documentation (where
-    `docs.json` is): ``` mintlify dev ```
-    <Note>
-      If you’re currently using the legacy ```mint.json``` configuration file, please update the Mintlify CLI:
+For JavaScript/Node.js, please follow the instructions provided in your invitation email.
 
+### Python Example
 
-      ```npm i -g mintlify@latest```
-      And run the new upgrade command in your docs repository:
+```python
+from tmac import TAMCClient
 
-      ```mintlify upgrade```
-      You should now be using the new ```docs.json``` configuration file. Feel free to delete the ```mint.json``` file from your repository.
-    </Note>
-  </Accordion>
-</AccordionGroup>
+# Initialize the client (authentication details may be required)
+client = TAMCClient(api_key="YOUR_API_KEY")
 
-### Deploy your changes
+# Define your query message
+messages = [
+  {"role": "user", "content": "Write merge sort in 3 lines."}
+]
 
-<AccordionGroup>
+# Specify the list of LLM providers (managed by TAMC)
+llm_providers = [
+    "openai/gpt-4o-2024-05-13",
+    "openai/gpt-4-turbo-2024-04-09",
+    "google/gemini-1.5-pro-latest",
+    "anthropic/claude-3-opus-20240229",
+    "anthropic/claude-3-5-sonnet-20240620"
+]
 
-<Accordion icon="message-bot" title="Install our Github app">
-  Our Github app automatically deploys your changes to your docs site, so you
-  don't need to manage deployments yourself. You can find the link to install on
-  your [dashboard](https://dashboard.mintlify.com). Once the bot has been
-  successfully installed, there should be a check mark next to the commit hash
-  of the repo.
-</Accordion>
-<Accordion icon="rocket" title="Push your changes">
-  [Commit and push your changes to
-  Git](https://docs.github.com/en/get-started/using-git/pushing-commits-to-a-remote-repository#about-git-push)
-  for your changes to update in your docs site. If you push and don't see that
-  the Github app successfully deployed your changes, you can also manually
-  update your docs through our [dashboard](https://dashboard.mintlify.com).
-</Accordion>
+# Call the TAMC router endpoint to get the best-suited model's response
+result, session_id, selected_provider = client.chat.completions.create(
+    messages=messages,
+    model=llm_providers
+)
 
-</AccordionGroup>
+print("Session ID:", session_id)
+print("Selected LLM:", selected_provider.model)
+print("Response:", result.content)
+```
 
-## Update your docs
+### JavaScript/Node.js Example
 
-Add content directly in your files with MDX syntax and React components. You can use any of our components, or even build your own.
+```javascript
+const { TAMCClient } = require("tmac");
 
-<CardGroup>
+// Initialize the client with your API key
+const client = new TAMCClient({ apiKey: "YOUR_API_KEY" });
 
-<Card title="Add Content With MDX" icon="file" href="/essentials/markdown">
-  Add content to your docs with MDX syntax.
-</Card>
+const messages = [
+  { role: "user", content: "Write merge sort in 3 lines." }
+];
 
-<Card
-  title="Add Code Blocks"
-  icon="square-code"
-  href="/essentials/code"
->
-  Add code directly to your docs with syntax highlighting.
-</Card>
+const llmProviders = [
+    "openai/gpt-4o-2024-05-13",
+    "openai/gpt-4-turbo-2024-04-09",
+    "google/gemini-1.5-pro-latest",
+    "anthropic/claude-3-opus-20240229",
+    "anthropic/claude-3-5-sonnet-20240620"
+];
 
-<Card
-  title="Add Images"
-  icon="image"
-  href="/essentials/images"
->
-  Add images to your docs to make them more engaging.
-</Card>
+// Request a response from the TAMC router
+client.chat.completions.create({ messages, model: llmProviders })
+  .then(({ result, session_id, selected_provider }) => {
+      console.log("Session ID:", session_id);
+      console.log("Selected LLM:", selected_provider.model);
+      console.log("Response:", result.content);
+  })
+  .catch(error => {
+      console.error("Error:", error);
+  });
+```
 
-<Card
-  title="Add Custom Components"
-  icon="puzzle-piece"
-  href="/essentials/reusable-snippets"
->
-  Add templates to your docs to make them more reusable.
-</Card>
+## Conclusion
 
-</CardGroup>
+With TAMC’s Super Model Router, you can seamlessly integrate multiple LLMs into your application without the overhead of custom training. This managed service allows you to focus on building innovative solutions while ensuring that each query is handled by the best available model. For additional details, please refer to the [official documentation](#) or contact our support team at [ahumay@americanmodel.co](mailto:ahumay@americanmodel.co).
