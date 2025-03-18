@@ -20,6 +20,12 @@
               "quickstart",
               "development"
             ]
+          },
+          {
+            "group": "Concepts",
+            "pages": [
+              "model-router-concept"
+            ]
           }
         ]
       }
