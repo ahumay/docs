@@ -1,6 +1,6 @@
 ---
 title: 'Quickstart'
-description: 'Getting started is as simple as integrating the TAMC Client into your application. Below are examples in both Python and JavaScript.'
+description: 'Pre-requisite: distribution of the TAMC package.'
 ---
 
 ### Installation
@@ -9,7 +9,7 @@ description: 'Getting started is as simple as integrating the TAMC Client into y
 Access to the TAMC client libraries is granted on an invitation-only basis. If you have been invited to use TAMC’s Super Model Router, you should have received instructions to install the package from our private repository. For example, if you are using Python, you might install the package using:
 
 ```bash
-pip install tmac --extra-index-url https://pypi.tmac.com/simple
+pip install tmac --extra-index-url https://pypi.tmac.com/tmac
 ```
 
 For JavaScript/Node.js, please follow the instructions provided in your invitation email.
@@ -29,11 +29,8 @@ messages = [
 
 # Specify the list of LLM providers (managed by TAMC)
 llm_providers = [
-    "openai/gpt-4o-2024-05-13",
-    "openai/gpt-4-turbo-2024-04-09",
-    "google/gemini-1.5-pro-latest",
-    "anthropic/claude-3-opus-20240229",
-    "anthropic/claude-3-5-sonnet-20240620"
+  "{model1}",
+  "{model2}"
 ]
 
 # Call the TAMC router endpoint to get the best-suited model's response
