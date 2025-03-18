@@ -9,13 +9,8 @@ To begin using TAMC’s Super Model Router, you need to obtain a unique TAMC API
 
 TAMC’s Super Model Router is designed as a client-side recommendation tool. All requests to LLMs are executed on your side using your own API keys. The TAMC service recommends the optimal model based on your input, but you remain in full control of your keys for each provider. For a complete list of supported LLMs, please see [Supported LLMs](doc:llm-models). You can sign up for API keys from the major providers in minutes:
 
-- `OPENAI_API_KEY` ([OpenAI ↗](https://platform.openai.com/signup))
-- `ANTHROPIC_API_KEY` ([Anthropic ↗](https://console.anthropic.com/))
-- `GOOGLE_API_KEY` ([Google ↗](https://aistudio.google.com/app/apikey))
-- `MISTRAL_API_KEY` ([Mistral ↗](https://auth.mistral.ai/ui/registration))
+- `OPENAI_API_KEY` 
+- `ANTHROPIC_API_KEY` 
+- `MISTRAL_API_KEY`
 
-Alternatively, you can use the [`model_select`](doc:model_select-vs-create) method to receive model recommendations from TAMC and then call the selected models in your own environment. 
-
-> **Note**
-> 
-> **Your API keys are never transmitted to our servers— all LLM requests are executed client-side.** This means TAMC will only call models for which you have provided valid access credentials. Our service supports most of the popular open and proprietary models.
+Alternatively, you can use the `best` method to receive model recommendations from TAMC and then call the selected models in your own environment. 

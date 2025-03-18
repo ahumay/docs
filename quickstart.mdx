@@ -56,15 +56,11 @@ const { TAMCClient } = require("tmac");
 const client = new TAMCClient({ apiKey: "YOUR_API_KEY" });
 
 const messages = [
-  { role: "user", content: "Write merge sort in 3 lines." }
+  { role: "user", content: "Explain how quantum genomics works." }
 ];
 
 const llmProviders = [
-    "openai/gpt-4o-2024-05-13",
-    "openai/gpt-4-turbo-2024-04-09",
-    "google/gemini-1.5-pro-latest",
-    "anthropic/claude-3-opus-20240229",
-    "anthropic/claude-3-5-sonnet-20240620"
+    "{model goes here}",
 ];
 
 // Request a response from the TAMC router
