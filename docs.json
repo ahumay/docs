@@ -24,7 +24,8 @@
           {
             "group": "Concepts",
             "pages": [
-              "model-router-concept"
+              "model-router-concept",
+              "how"
             ]
           }
         ]

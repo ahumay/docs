@@ -1,0 +1,48 @@
+---
+title: 'How to make a model router'
+description: ''
+---
+
+Our objective was to create a powerful **LLM router** that intelligently directs scientific queries either to an advanced, high-quality closed model (**OpenAI o3-mini-high**) or to a more economical open-source model (**Mistral-8x7B**). This allows us to maximize scientific accuracy and rigor while minimizing computational expense.
+
+### Step 1: Scientific Dataset Preparation and Labeling
+
+**Scientific Dataset Selection:**  
+We specifically selected complex scientific-domain queries from the publicly available **Nectar dataset**. Nectar provides a diverse collection of scientifically rigorous questions and associated detailed model-generated responses, including over 191K expert-level responses from GPT-4 and related large models.
+
+**Data Labeling Approach (1–3 Rating Scale):**  
+To best capture Mistral's capability to respond accurately to each scientific query, we adopted a simplified yet robust rating scale:
+
+- **Score 3 (High Quality):** Mistral provides scientifically accurate, detailed, and comprehensive answers.
+- **Score 2 (Moderate Quality):** Mistral answers adequately but lacks complete depth or nuance.
+- **Score 1 (Low Quality):** Mistral significantly struggles, indicating that the complexity and rigor of the query necessitate routing to the OpenAI o3-mini-high model.
+
+To efficiently label a large dataset, we employed a scalable, automated "**LLM-as-a-Judge**" methodology, using the highly capable **OpenAI o3-mini-high** model to objectively evaluate Mistral’s responses against high-quality reference responses.
+
+### Step 2: Fine-Tuning Our Custom LLaMA-3.1 Router 
+
+**Router Model Selection:**  
+We chose a specialized **LLaMA-3.1 8B** model to function as our router. Its compact size ensures quick and cost-effective inference when deciding query routing.
+
+**Training Process:**  
+- The router was trained exclusively on scientific queries, explicitly fine-tuned to predict Mistral's response quality rating (1–3) based solely on the query text.
+- Training queries were presented in structured, instruction-driven prompts clearly guiding the model to recognize query complexity and the scientific depth required.
+- We ensured balanced representation across rating scores, preventing bias toward either model and ensuring robust, generalizable performance.
+
+**Training Implementation:**  
+- Conducted full-parameter fine-tuning using GPU resources, ensuring efficient and high-quality convergence.
+- Validated strong predictive performance on scientific queries post-training.
+
+### Step 3: Router Evaluation and Optimization
+
+We thoroughly evaluated our trained router against challenging scientific benchmarks (e.g., GSM8K and other quantitative reasoning tasks) to assess its ability to accurately direct queries, maintaining high accuracy at reduced cost.
+
+**Evaluation Highlights:**
+- Our router effectively identified when Mistral-8x7B could reliably handle queries, thereby reducing the need for expensive calls to OpenAI o3-mini-high.
+- Compared to a random baseline, our scientifically-specialized router provided substantial cost savings while maintaining scientific rigor:
+  - Up to **70% cost reduction** on general scientific benchmarks.
+  - Approximately **40% cost reduction** on challenging quantitative tasks.
+
+## Conclusion
+
+Through targeted scientific query selection, a streamlined 1–3 labeling approach using OpenAI o3-mini-high as an evaluator, and careful fine-tuning of a compact **LLaMA-3.1-8B** router model, we have successfully developed a scientifically specialized LLM router. This router reliably delivers accurate and high-quality scientific responses while significantly reducing computational and financial costs associated with exclusive use of larger closed-source models.
