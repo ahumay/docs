@@ -27,6 +27,12 @@
               "model-router-concept",
               "how"
             ]
+          },
+          {
+            "group": "Why",
+            "pages": [
+              "benefits"
+            ]
           }
         ]
       }
