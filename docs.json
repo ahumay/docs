@@ -33,6 +33,12 @@
             "pages": [
               "why/benefits"
             ]
+          },
+          {
+            "group": "How",
+            "pages": [
+              "how/forward-deployed-engineering"
+            ]
           }
         ]
       }
