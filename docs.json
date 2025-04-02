@@ -16,22 +16,22 @@
           {
             "group": "Get Started",
             "pages": [
-              "introduction",
-              "quickstart",
-              "development"
+              "get-started/introduction",
+              "get-started/quickstart",
+              "get-started/development"
             ]
           },
           {
             "group": "Concepts",
             "pages": [
-              "model-router-concept",
-              "how"
+              "concepts/model-router-concept",
+              "concepts/how"
             ]
           },
           {
             "group": "Why",
             "pages": [
-              "benefits"
+              "why/benefits"
             ]
           }
         ]
